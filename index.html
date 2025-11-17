@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="飲食與健康知識大考驗 - SCORM 1.2 線上測驗課程">
+    <title>飲食與健康知識大考驗</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- p5.js CDN (必須最先載入) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <!-- SCORM API 包裝層 -->
+    <script src="scorm_api_wrapper.js"></script>
+</head>
+<body>
+    <!-- 影片播放區域 -->
+    <div id="videoSection" class="section active">
+        <div class="video-container">
+            <video id="videoPlayer" width="100%" height="100%" controls>
+                <source src="videoplayback.mp4" type="video/mp4">
+                您的瀏覽器不支援影片播放
+            </video>
+            <button id="startQuizBtn" class="start-quiz-btn">開始答題</button>
+        </div>
+    </div>
+
+    <!-- 答題頁面 (p5.js sketch) -->
+    <div id="quizSection" class="section">
+        <div id="p5-container"></div>
+        <button id="backToVideoBtn" class="back-to-video-btn">← 返回影片</button>
+    </div>
+
+    <!-- SCORM 狀態指示器 -->
+    <div id="scormStatus" style="position: fixed; bottom: 10px; right: 10px; padding: 8px 12px; background-color: rgba(0, 0, 0, 0.7); color: white; font-size: 12px; border-radius: 4px; z-index: 1000; display: none; font-weight: 600;">
+        <span id="scormStatusText">SCORM 狀態: 離線</span>
+    </div>
+
+    <!-- 主要指令碼 (依賴順序) -->
+    <script src="sketch.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- SCORM 初始化完成回調 -->
+    <script>
+        // 確保 SCORM API 初始化完成
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof scormAPI !== 'undefined') {
+                // 更新 SCORM 狀態指示器
+                const statusDiv = document.getElementById('scormStatus');
+                const statusText = document.getElementById('scormStatusText');
+                
+                if (scormAPI.isInitialized()) {
+                    statusDiv.style.display = 'block';
+                    statusText.textContent = `✓ SCORM 已連接 | 作答次數: ${scormAPI.getAttemptCount()}`;
+                    statusDiv.style.backgroundColor = 'rgba(0, 150, 50, 0.9)';
+                } else {
+                    statusDiv.style.display = 'block';
+                    statusText.textContent = '⚠ 離線模式 (成績不會保存)';
+                    statusDiv.style.backgroundColor = 'rgba(255, 150, 0, 0.9)';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

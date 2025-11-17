@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="dietary_health_quiz_v1" version="1.0"
+    xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+    xmlns:adlcp="http://www.adlnet.org/xsd/adl_cp_v1_2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 
+                        http://www.imsglobal.org/xsd/imscp_v1p1.xsd
+                        http://www.adlnet.org/xsd/adl_cp_v1_2 
+                        http://www.adlnet.org/xsd/adl_cp_v1_2.xsd">
+
+    <!-- 元數據 -->
+    <metadata>
+        <schema>ADL SCORM</schema>
+        <schemaversion>1.2</schemaversion>
+        <lom xmlns="http://ltsc.ieee.org/xsd/LOM">
+            <general>
+                <title>
+                    <langstring xml:lang="zh-TW">飲食與健康知識大考驗</langstring>
+                </title>
+                <description>
+                    <langstring xml:lang="zh-TW">透過影片學習飲食健康知識，完成線上測驗並獲得成績評分。課程包含6道選擇題，測試學生對飲食營養的理解。</langstring>
+                </description>
+                <language>zh-TW</language>
+            </general>
+        </lom>
+    </metadata>
+
+    <!-- 組織結構 -->
+    <organizations default="ORG-001">
+        <organization identifier="ORG-001">
+            <title>飲食與健康知識大考驗</title>
+            <description>飲食與健康知識線上測驗課程</description>
+            
+            <!-- 主要課程單元 -->
+            <item identifier="ITEM-001" identifierref="RES-001" isvisible="true">
+                <title>飲食與健康知識測驗</title>
+                <description>觀看影片後進行線上測驗，共6道選擇題，滿分100分，60分及格</description>
+            </item>
+        </organization>
+    </organizations>
+
+    <!-- 資源清單 -->
+    <resources>
+        <!-- 主課程資源 (SCO - Sharable Content Object) -->
+        <resource identifier="RES-001" 
+                  type="webcontent" 
+                  adlcp:scormType="sco" 
+                  href="index.html">
+            
+            <metadata>
+                <schema>ADL SCORM</schema>
+                <schemaversion>1.2</schemaversion>
+                <lom xmlns="http://ltsc.ieee.org/xsd/LOM">
+                    <technical>
+                        <format>text/html</format>
+                        <location>index.html</location>
+                    </technical>
+                </lom>
+            </metadata>
+
+            <!-- 課程所需的所有檔案 -->
+            <file href="index.html"/>
+            <file href="styles.css"/>
+            <file href="script.js"/>
+            <file href="sketch.js"/>
+            <file href="scorm_api_wrapper.js"/>
+            <file href="video.mp4"/>
+            
+            <!-- 外部資源 (CDN) - 註解: Moodle 會自動處理 -->
+            <!-- <file href="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"/> -->
+        </resource>
+    </resources>
+</manifest>
